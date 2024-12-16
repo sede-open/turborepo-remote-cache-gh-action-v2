@@ -4,7 +4,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  lint-build-verify:
+  lint-build-verify-sonar:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,6 +21,15 @@ jobs:
 
       - name: Check working copy
         run: git diff --exit-code
+
+      - name: Sonar
+        uses: sonarsource/sonarqube-scan-action@v4
+        with:
+          args: >
+            -Dsonar.projectKey=com.shell.gh-actions-turborepo-remote-cache-v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
 
   test-starts:
     runs-on: ubuntu-latest
