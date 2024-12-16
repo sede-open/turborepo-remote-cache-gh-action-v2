@@ -33,3 +33,9 @@ jobs:
           echo $TURBO_API | grep -P "^http://127.0.0.1:\d+$"
           echo $TURBO_TOKEN | grep -P "^[a-zA-Z0-9]{48}$"
           echo $TURBO_TEAM | grep -P "^ci$"
+
+      - name: Sonar check
+        uses: sonarsource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
