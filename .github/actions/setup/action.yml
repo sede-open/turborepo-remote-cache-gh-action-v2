@@ -3,7 +3,7 @@ description: "Setup Node, PNPM, and install dependencies"
 runs:
   using: "composite"
   steps:
-    - run: npm install -g pnpm@9.15.0
+    - run: npm install -g pnpm@latest-7
       shell: bash
 
     - uses: actions/setup-node@v4
